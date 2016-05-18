@@ -43,6 +43,9 @@ class CompanyDisplay extends React.Component<Company, Company> {
                     <td>Misc</td>
                     <td>{this.props.Misc}</td>
                 </tr>
+                <tr>
+                    <td colSpan={2}><a className = "btn btn-primary" href={"/Companies/Edit/" + this.props.ID}>Edit</a></td>
+                </tr>
             </table>);
     }
 }
@@ -62,7 +65,7 @@ var CommentBox = React.createClass({
 });
 
 
-$.getJSON("/Home/GetCompany/1",
+$.getJSON("/Companies/GetCompany/1",
     (data) => {
         ReactDOM.render(
             <CompanyDisplay

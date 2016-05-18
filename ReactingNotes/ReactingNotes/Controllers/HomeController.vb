@@ -38,23 +38,6 @@
     End Function
 
 
-    Public Function GetCompany(ID As Integer) As ActionResult
-        Dim db As New DatabaseContainer
 
-        Return Json(
-            db.Companies.Find(ID),
-            JsonRequestBehavior.AllowGet
-        )
-
-        'Return Json(
-        '    New Company With {.Name = "AJP Northwest"},
-        '    JsonRequestBehavior.AllowGet
-        ')
-
-
-        'Return Json(New Company With {.Name = "AJP Northwest"})
-        'Return New JsonResult() With {.Data = New Company With {.Name = "AJP Northwest"}}
-        'Return New Company With {.Name = "AJP Northwest"}
-    End Function
 
 End Class
