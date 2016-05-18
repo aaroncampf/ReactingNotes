@@ -13,4 +13,10 @@ End Code
 <script src="~/Scripts/HelloReact.js"></script>
 
 
+<div id="Comment1"/>
 
+<script>
+	ReactDOM.render(
+		React.createElement(CommentBox, null), document.getElementById('Comment1')
+	);
+</script>
