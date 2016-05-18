@@ -18,7 +18,7 @@ var CompanyDisplay = (function (_super) {
         _super.apply(this, arguments);
     }
     CompanyDisplay.prototype.render = function () {
-        return (React.createElement("div", null, "Hello ", this.props.Name));
+        return (React.createElement("table", {"className": "table-striped table-bordered"}, React.createElement("tr", null, React.createElement("td", {"colSpan": 2, "style": { "text-align": "center" }}, React.createElement("h3", null, this.props.Name))), React.createElement("tr", null, React.createElement("td", null, "ID"), React.createElement("td", null, this.props.ID)), React.createElement("tr", null, React.createElement("td", null, "Address"), React.createElement("td", null, this.props.Address)), React.createElement("tr", null, React.createElement("td", null, "City"), React.createElement("td", null, this.props.City)), React.createElement("tr", null, React.createElement("td", null, "Phone"), React.createElement("td", null, this.props.Phone)), React.createElement("tr", null, React.createElement("td", null, "Zip"), React.createElement("td", null, this.props.Zip)), React.createElement("tr", null, React.createElement("td", null, "Misc"), React.createElement("td", null, this.props.Misc))));
     };
     return CompanyDisplay;
 })(React.Component);

@@ -14,14 +14,36 @@ class Company {
     public Misc: String
 }
 
-
-
 class CompanyDisplay extends React.Component<Company, Company> {
     render() {
         return(
-            <div>
-                Hello {this.props.Name}
-            </div>);
+            <table className = "table-striped table-bordered">
+                <tr><td colSpan={2} style = {{ "text-align": "center" }}><h3>{this.props.Name}</h3></td></tr>
+                <tr>
+                    <td>ID</td>
+                    <td>{this.props.ID}</td>
+                </tr>       
+                <tr>
+                    <td>Address</td>
+                    <td>{this.props.Address}</td>
+                </tr>
+                <tr>
+                    <td>City</td>
+                    <td>{this.props.City}</td>
+                </tr>
+                <tr>
+                    <td>Phone</td>
+                    <td>{this.props.Phone}</td>
+                </tr>
+                <tr>
+                    <td>Zip</td>
+                    <td>{this.props.Zip}</td>
+                </tr>
+                <tr>
+                    <td>Misc</td>
+                    <td>{this.props.Misc}</td>
+                </tr>
+            </table>);
     }
 }
 

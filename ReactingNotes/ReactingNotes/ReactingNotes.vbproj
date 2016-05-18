@@ -244,6 +244,7 @@
       <LastGenOutput>Database.Context.vb</LastGenOutput>
       <DependentUpon>Database.edmx</DependentUpon>
     </Content>
+    <Content Include="Database\Database.edmx.sql" />
     <Content Include="Database\Database.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Database.vb</LastGenOutput>
