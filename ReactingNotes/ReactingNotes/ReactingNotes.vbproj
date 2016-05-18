@@ -172,6 +172,7 @@
     <Compile Include="App_Start\RouteConfig.vb" />
     <Compile Include="App_Start\WebApiConfig.vb" />
     <Compile Include="Controllers\CompaniesController.vb" />
+    <Compile Include="Controllers\ValuesController.vb" />
     <Compile Include="Database\Company.vb">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>

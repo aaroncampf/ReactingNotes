@@ -2116,6 +2116,11 @@ declare namespace __React {
         item(index: number): Touch;
         identifiedTouch(identifier: number): Touch;
     }
+
+    /**
+     * Moved here by Aaron Campf
+     */
+    function renderToString(element: ReactElement<any>): string;
 }
 
 declare module "react" {

@@ -31,6 +31,10 @@
             .Zip = "97214"
         }
 
+        Dim Quote1 As New Quote With {.Name = "Quote1", .Date = Now}
+        AJP.Quotes.Add(Quote1)
+
+
         db.Companies.Add(AJP)
 
         db.SaveChanges()

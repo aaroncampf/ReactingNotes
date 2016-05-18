@@ -17,7 +17,12 @@ Partial Public Class Contact
     Public Property Email As String
     Public Property Position As String
 
+    '<Newtonsoft.Json.JsonIgnore>
+    '<Runtime.Serialization.IgnoreDataMember>
     Public Overridable Property Notes As ICollection(Of Note) = New HashSet(Of Note)
+
+    '<Newtonsoft.Json.JsonIgnore>
+    '<Runtime.Serialization.IgnoreDataMember>
     Public Overridable Property Company As Company
 
 End Class

@@ -1,9 +1,5 @@
-﻿Imports System.Data
-Imports System.Data.Entity
-Imports System.Linq
+﻿Imports System.Data.Entity
 Imports System.Net
-Imports System.Web
-Imports System.Web.Mvc
 
 Namespace Controllers
     Public Class CompaniesController
@@ -96,10 +92,27 @@ Namespace Controllers
             Return RedirectToAction("Index")
         End Function
 
+        Public Function GetCompany(ID As Integer) As JsonResult
+            'TODO: convert this project into WebAPI and see if that resolves the issue
+            Dim Test = db.Companies.Find(ID)
 
-        Public Function GetCompany(ID As Integer) As ActionResult
+            Return Json(New With {
+                            .ID = Test.ID,
+                            .Name = Test.Name,
+                            .Address = Test.Address,
+                            .City = Test.City,
+                            .Phone = Test.Phone,
+                            .Zip = Test.Zip,
+                            .Misc = Test.Misc
+                        },
+                        JsonRequestBehavior.AllowGet
+            )
+        End Function
+
+        Public Function GetQuotes(ID As Integer) As ActionResult
+            Dim JSON_Data = db.Companies.Find(ID).Quotes.Select(Function(x) New With {x.ID, x.Name, x.Date})
             Return Json(
-                db.Companies.Find(ID),
+                JSON_Data,
                 JsonRequestBehavior.AllowGet
             )
         End Function
