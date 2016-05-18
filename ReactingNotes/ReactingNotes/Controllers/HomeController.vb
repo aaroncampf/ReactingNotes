@@ -16,4 +16,9 @@
 
 		Return View()
 	End Function
+
+	Public Function GetCustomer() As Company
+		Return New Company With {.Name = "AJP Northwest"}
+	End Function
+
 End Class

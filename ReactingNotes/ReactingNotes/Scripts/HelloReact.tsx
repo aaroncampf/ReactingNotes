@@ -1,9 +1,10 @@
 ﻿/// <reference path="types/react.d.ts" />
 /// <reference path="types/react-global.d.ts" />
+/// <reference path="typings/jquery/jquery.d.ts" />
 ///// <reference path="types/react-dom.d.ts" />
 
 
-class Customer {
+class Company {
     public ID: Number
     public Name: String
     public Address: String
@@ -15,7 +16,7 @@ class Customer {
 
 
 
-class HelloMessage extends React.Component<Customer, Customer> {
+class CompanyDisplay extends React.Component<Company, Company> {
     render() {
         return(
             <div>
@@ -39,7 +40,16 @@ var CommentBox = React.createClass({
 });
 
 
+$.getJSON("/Home/GetCustomer",
+    (data) => {
+        data.tostring();
+    }
+);
+
 ReactDOM.render(
-    <HelloMessage Name="Sebastian"/>,
+    <CompanyDisplay
+        ID="0"
+        Name="Sebastian"
+    />,
     document.getElementById('content')
 );
