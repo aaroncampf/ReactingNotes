@@ -40,16 +40,34 @@ var CommentBox = React.createClass({
 });
 
 
-$.getJSON("/Home/GetCustomer",
+$.getJSON("/Home/GetCompany/1",
     (data) => {
-        data.tostring();
+        ReactDOM.render(
+            <CompanyDisplay
+                ID= {data.ID}
+                Name={data.Name}
+                Address = {data.Address}
+                City = {data.City}
+                Phone ={data.Phone}
+                Zip={data.Zip}
+                Misc= {data.Misc}
+                />,
+            document.getElementById('content')
+        );
     }
 );
 
-ReactDOM.render(
-    <CompanyDisplay
-        ID="0"
-        Name="Sebastian"
-    />,
-    document.getElementById('content')
-);
+
+
+//ReactDOM.render(
+//    <CompanyDisplay
+//        ID={1}
+//        Name="Sebastian"
+//        Address = ""
+//        City = "Portland"
+//        Phone =""
+//        Zip=""
+//        Misc= ""
+//    />,
+//    document.getElementById('content')
+//);
