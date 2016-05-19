@@ -31,6 +31,9 @@
             .Zip = "97214"
         }
 
+        Dim Contact1 As New Contact With {.Name = "Aaron Campf", .Phone = "(503) 929-8022", .Email = "aaroncampf@gmail.com", .Position = "Lead Developer"}
+        AJP.Contacts.Add(Contact1)
+
         Dim Quote1 As New Quote With {.Name = "Quote1", .Date = Now}
         Quote1.Lines.Add(New QuoteLine With {.Display = 1, .UNIT = "Box", .COST = 2.52, .DESC = "Tissues", .IsCentered = False})
         AJP.Quotes.Add(Quote1)

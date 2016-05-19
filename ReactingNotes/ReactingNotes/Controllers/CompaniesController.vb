@@ -119,6 +119,18 @@ Namespace Controllers
             Return Json(JSON_Data, JsonRequestBehavior.AllowGet)
         End Function
 
+        Public Function GetContacts(ID As Integer) As ActionResult
+            Dim JSON_Data = db.Companies.Find(ID).Contacts.Select(
+                Function(x)
+                    Dim Notes = db.Contacts.Find(x.ID).Notes.ToArray.Select(Function(y) New With {y.ID, y.Date, y.Title, y.Text})
+                    Return New With {x.ID, x.Name, x.Phone, x.Email, x.Position, Notes}
+                End Function)
+
+            Return Json(JSON_Data, JsonRequestBehavior.AllowGet)
+        End Function
+
+
+
         Protected Overrides Sub Dispose(ByVal disposing As Boolean)
             If (disposing) Then
                 db.Dispose()
