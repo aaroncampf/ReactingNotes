@@ -1,44 +1,63 @@
 ﻿/// <reference path="types/react.d.ts" />
 /// <reference path="types/react-global.d.ts" />
 /// <reference path="typings/jquery/jquery.d.ts" />
-///// <reference path="types/react-dom.d.ts" />
+/// <reference path="types/react-dom.d.ts" />
 
 
 class Company {
-    public ID: Number
-    public Name: String
-    public Address: String
-    public City: String
-    public Phone: String
-    public Zip: String
-    public Misc: String
+    public ID: number
+    public Name: string
+    public Address: string
+    public City: string
+    public Phone: string
+    public Zip: string
+    public Misc: string
 }
 
 class Quote {
-    public ID: Number
-    public Name: String
+    public ID: number
+    public Name: string
     public Date: Date
+    public Lines: QuoteLine[]
 }
+
+class QuoteLine {
+    public ID: number
+    public Display: number
+    public UNIT: string
+    public COST: number
+    public DESC : string
+    public IsCentered : boolean
+}
+
 
 
 class QuoteDisplay extends React.Component<Quote, Quote> {
     render() {
-        return (
+        var Rows: JSX.Element[] = []
+        for (var Item of this.props.Lines) {
+            var Test =
+                <tr>
+                    <td>{Item.Display}</td>
+                    <td>{Item.UNIT}</td>
+                    <td>{Item.COST}</td>
+                    <td>{Item.DESC}</td>
+                    <td>{Item.IsCentered}</td>
+                </tr>
+            Rows.push(Test)
+        }
+
+        return(
             <table id={"QuoteDisplay-" + this.props.ID} className = "table-striped table-bordered">
-                <tr><td colSpan={2} style = {{ "text-align": "center" }}><h3>{this.props.Name}</h3></td></tr>
+                <tr><td colSpan={5} style = {{ "text-align": "center" }}><h3>{this.props.Name}</h3></td></tr>
+                {Rows}
             </table>);
     }
 }
 
 
-
-
-
 class CompanyDisplay extends React.Component<Company, Company> {
     private ViewQuotes = (Current: CompanyDisplay) => { //TODO: Get help removing this BS because [this] is broken
-        //alert("Hello World")
-        //var _this: CompanyDisplay
-       
         $("#CompanyDisplay-" + this.props.ID).append("<div id='fhhgk75d47' />")
         var LastQuoteElement = document.getElementById("fhhgk75d47")
 
@@ -46,6 +65,14 @@ class CompanyDisplay extends React.Component<Company, Company> {
             (data) => {              
                 for (var Item of data) {
                     var Quote: Quote = Item
+
+                    var T1 = new QuoteDisplay(Quote, this.context)
+                    var Test = React.renderToString(
+                        <QuoteDisplay ID = {Quote.ID} Name = {Quote.Name} Date = {Quote.Date} Lines = {Quote.Lines} />
+                    );
+
+
+                    /*
                     var s1 = React.renderToString(
                         <table id={"QuoteDisplay-" + Quote.ID} className = "table-striped table-bordered">
                             <tr><td colSpan={2} style = {{ "text-align": "center" }}><h3>{Quote.Name}</h3></td></tr>
@@ -55,22 +82,11 @@ class CompanyDisplay extends React.Component<Company, Company> {
                             </tr>   
                         </table>
                     );
-                    $("#fhhgk75d47").append(s1)
+                    */
+                    $("#fhhgk75d47").append(Test)
                 }
             }
         )
-
-        //var Test =
-        //    <table className = "table-striped table-bordered">
-
-        //        </table>
-
-
-        //$("#CompanyDisplay-" + this.props.ID).append("<div id='fhhgk75d47' />")
-        //ReactDOM.render(Test, document.getElementById("fhhgk75d47"))
-
-        //React.renderToStaticMarkup
-        //$("#CompanyDisplay-" + Current.props.ID).append(React.__DOMServer.renderToStaticMarkup(Test));
     }
 
     render() {
@@ -107,7 +123,7 @@ class CompanyDisplay extends React.Component<Company, Company> {
                 <tr>
                     <td colSpan={2}><a className = "btn btn-primary" onClick= {() => this.ViewQuotes(this) }>View Quotes</a></td>
                 </tr> 
-                </table>);
+            </table>);
     }
 }
 
@@ -137,7 +153,7 @@ $.ajax("/Companies/GetCompany/1")
 //$.ajax("/Companies/GetCompany/1").
 
 
-
+/*
 $.get("/Companies/GetCompany/1",
     (data) => {
         ReactDOM.render(
@@ -154,6 +170,7 @@ $.get("/Companies/GetCompany/1",
         );
     }
 );
+*/
 
 $.getJSON("/Companies/GetCompany/1",
     (data) => {

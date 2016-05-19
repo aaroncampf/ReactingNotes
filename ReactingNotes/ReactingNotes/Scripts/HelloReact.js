@@ -1,7 +1,7 @@
 /// <reference path="types/react.d.ts" />
 /// <reference path="types/react-global.d.ts" />
 /// <reference path="typings/jquery/jquery.d.ts" />
-///// <reference path="types/react-dom.d.ts" />
+/// <reference path="types/react-dom.d.ts" />
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -17,13 +17,24 @@ var Quote = (function () {
     }
     return Quote;
 })();
+var QuoteLine = (function () {
+    function QuoteLine() {
+    }
+    return QuoteLine;
+})();
 var QuoteDisplay = (function (_super) {
     __extends(QuoteDisplay, _super);
     function QuoteDisplay() {
         _super.apply(this, arguments);
     }
     QuoteDisplay.prototype.render = function () {
-        return (React.createElement("table", {"id": "QuoteDisplay-" + this.props.ID, "className": "table-striped table-bordered"}, React.createElement("tr", null, React.createElement("td", {"colSpan": 2, "style": { "text-align": "center" }}, React.createElement("h3", null, this.props.Name)))));
+        var Rows = [];
+        for (var _i = 0, _a = this.props.Lines; _i < _a.length; _i++) {
+            var Item = _a[_i];
+            var Test = React.createElement("tr", null, React.createElement("td", null, Item.Display), React.createElement("td", null, Item.UNIT), React.createElement("td", null, Item.COST), React.createElement("td", null, Item.DESC), React.createElement("td", null, Item.IsCentered));
+            Rows.push(Test);
+        }
+        return (React.createElement("table", {"id": "QuoteDisplay-" + this.props.ID, "className": "table-striped table-bordered"}, React.createElement("tr", null, React.createElement("td", {"colSpan": 5, "style": { "text-align": "center" }}, React.createElement("h3", null, this.props.Name))), Rows));
     };
     return QuoteDisplay;
 })(React.Component);
@@ -33,25 +44,28 @@ var CompanyDisplay = (function (_super) {
         var _this = this;
         _super.apply(this, arguments);
         this.ViewQuotes = function (Current) {
-            //alert("Hello World")
-            //var _this: CompanyDisplay
             $("#CompanyDisplay-" + _this.props.ID).append("<div id='fhhgk75d47' />");
             var LastQuoteElement = document.getElementById("fhhgk75d47");
             $.getJSON("/Companies/GetQuotes/" + _this.props.ID, function (data) {
                 for (var _i = 0; _i < data.length; _i++) {
                     var Item = data[_i];
                     var Quote = Item;
-                    var s1 = React.renderToString(React.createElement("table", {"id": "QuoteDisplay-" + Quote.ID, "className": "table-striped table-bordered"}, React.createElement("tr", null, React.createElement("td", {"colSpan": 2, "style": { "text-align": "center" }}, React.createElement("h3", null, Quote.Name))), React.createElement("tr", null, React.createElement("td", null, "Date"), React.createElement("td", null, Quote.Date))));
-                    $("#fhhgk75d47").append(s1);
+                    var T1 = new QuoteDisplay(Quote, _this.context);
+                    var Test = React.renderToString(React.createElement(QuoteDisplay, {"ID": Quote.ID, "Name": Quote.Name, "Date": Quote.Date, "Lines": Quote.Lines}));
+                    /*
+                    var s1 = React.renderToString(
+                        <table id={"QuoteDisplay-" + Quote.ID} className = "table-striped table-bordered">
+                            <tr><td colSpan={2} style = {{ "text-align": "center" }}><h3>{Quote.Name}</h3></td></tr>
+                            <tr>
+                                <td>Date</td>
+                                <td>{Quote.Date}</td>
+                            </tr>
+                        </table>
+                    );
+                    */
+                    $("#fhhgk75d47").append(Test);
                 }
             });
-            //var Test =
-            //    <table className = "table-striped table-bordered">
-            //        </table>
-            //$("#CompanyDisplay-" + this.props.ID).append("<div id='fhhgk75d47' />")
-            //ReactDOM.render(Test, document.getElementById("fhhgk75d47"))
-            //React.renderToStaticMarkup
-            //$("#CompanyDisplay-" + Current.props.ID).append(React.__DOMServer.renderToStaticMarkup(Test));
         };
     }
     CompanyDisplay.prototype.render = function () {
@@ -78,9 +92,24 @@ myRequest.open("GET", "/Companies/GetCompany/1");
 myRequest.response;
 $.ajax("/Companies/GetCompany/1");
 //$.ajax("/Companies/GetCompany/1").
-$.get("/Companies/GetCompany/1", function (data) {
-    ReactDOM.render(React.createElement(CompanyDisplay, {"ID": data.ID, "Name": data.Name, "Address": data.Address, "City": data.City, "Phone": data.Phone, "Zip": data.Zip, "Misc": data.Misc}), document.getElementById('content'));
-});
+/*
+$.get("/Companies/GetCompany/1",
+    (data) => {
+        ReactDOM.render(
+            <CompanyDisplay
+                ID= {data.ID}
+                Name={data.Name}
+                Address = {data.Address}
+                City = {data.City}
+                Phone ={data.Phone}
+                Zip={data.Zip}
+                Misc= {data.Misc}
+                />,
+            document.getElementById('content')
+        );
+    }
+);
+*/
 $.getJSON("/Companies/GetCompany/1", function (data) {
     ReactDOM.render(React.createElement(CompanyDisplay, {"ID": data.ID, "Name": data.Name, "Address": data.Address, "City": data.City, "Phone": data.Phone, "Zip": data.Zip, "Misc": data.Misc}), document.getElementById('content'));
 });

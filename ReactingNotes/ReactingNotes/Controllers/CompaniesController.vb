@@ -110,11 +110,13 @@ Namespace Controllers
         End Function
 
         Public Function GetQuotes(ID As Integer) As ActionResult
-            Dim JSON_Data = db.Companies.Find(ID).Quotes.Select(Function(x) New With {x.ID, x.Name, x.Date})
-            Return Json(
-                JSON_Data,
-                JsonRequestBehavior.AllowGet
-            )
+            Dim JSON_Data = db.Companies.Find(ID).Quotes.Select(
+                Function(x)
+                    Dim Lines = db.Quotes.Find(x.ID).Lines.ToArray.Select(Function(y) New With {y.ID, y.UNIT, y.COST, y.DESC, y.IsCentered})
+                    Return New With {x.ID, x.Name, x.Date, Lines}
+                End Function)
+
+            Return Json(JSON_Data, JsonRequestBehavior.AllowGet)
         End Function
 
         Protected Overrides Sub Dispose(ByVal disposing As Boolean)
