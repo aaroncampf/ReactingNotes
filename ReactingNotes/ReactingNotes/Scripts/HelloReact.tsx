@@ -93,7 +93,7 @@ class ContactDisplay extends React.Component<Contact, Contact> {
                         <td>{this.props.Position}</td>
                     </tr>
                     <tr>
-                        <td colSpan={2}><a className = "btn btn-primary" onClick= {() => this.ViewNotes(this) }>View Contacts</a></td>
+                        <td colSpan={2}><a className = "btn btn-primary" onClick= {() => this.ViewNotes(this)}>View Notes</a></td> //TODO: Get help getting this event to stay
                     </tr> 
                 </tbody>
             </table>);
@@ -149,7 +149,6 @@ class CompanyDisplay extends React.Component<Company, Company> {
 
     private ViewContacts = (Current: CompanyDisplay) => { //TODO: Get help removing this BS because [this] is broken
         $("#CompanyDisplay-" + this.props.ID).append("<div id='fhhgk75d471' />")
-        var LastQuoteElement = document.getElementById("fhhgk75d47")
 
         $.getJSON("/Companies/GetContacts/" + this.props.ID,
             (data) => {

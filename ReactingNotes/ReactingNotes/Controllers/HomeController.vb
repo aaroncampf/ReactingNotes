@@ -32,6 +32,7 @@
         }
 
         Dim Contact1 As New Contact With {.Name = "Aaron Campf", .Phone = "(503) 929-8022", .Email = "aaroncampf@gmail.com", .Position = "Lead Developer"}
+        Contact1.Notes.Add(New Note With {.Date = Now, .Title = "Test", .Text = "Hello World"})
         AJP.Contacts.Add(Contact1)
 
         Dim Quote1 As New Quote With {.Name = "Quote1", .Date = Now}

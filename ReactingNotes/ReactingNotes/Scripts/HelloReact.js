@@ -50,7 +50,8 @@ var ContactDisplay = (function (_super) {
     }
     ContactDisplay.prototype.render = function () {
         var _this = this;
-        return (React.createElement("table", {"id": "ContactDisplay-" + this.props.ID, "className": "table-striped table-bordered"}, React.createElement("tbody", null, React.createElement("tr", null, React.createElement("td", {"colSpan": 2, "style": { "text-align": "center" }}, React.createElement("h3", null, this.props.Name))), React.createElement("tr", null, React.createElement("td", null, "ID"), React.createElement("td", null, this.props.ID)), React.createElement("tr", null, React.createElement("td", null, "Phone"), React.createElement("td", null, this.props.Phone)), React.createElement("tr", null, React.createElement("td", null, "Email"), React.createElement("td", null, this.props.Email)), React.createElement("tr", null, React.createElement("td", null, "Position"), React.createElement("td", null, this.props.Position)), React.createElement("tr", null, React.createElement("td", {"colSpan": 2}, React.createElement("a", {"className": "btn btn-primary", "onClick": function () { return _this.ViewNotes(_this); }}, "View Contacts"))))));
+        return (React.createElement("table", {"id": "ContactDisplay-" + this.props.ID, "className": "table-striped table-bordered"}, React.createElement("tbody", null, React.createElement("tr", null, React.createElement("td", {"colSpan": 2, "style": { "text-align": "center" }}, React.createElement("h3", null, this.props.Name))), React.createElement("tr", null, React.createElement("td", null, "ID"), React.createElement("td", null, this.props.ID)), React.createElement("tr", null, React.createElement("td", null, "Phone"), React.createElement("td", null, this.props.Phone)), React.createElement("tr", null, React.createElement("td", null, "Email"), React.createElement("td", null, this.props.Email)), React.createElement("tr", null, React.createElement("td", null, "Position"), React.createElement("td", null, this.props.Position)), React.createElement("tr", null, React.createElement("td", {"colSpan": 2}, React.createElement("a", {"className": "btn btn-primary", "onClick": function () { return _this.ViewNotes(_this); }}, "View Notes")) //TODO: Get help getting this event to stay
+        , " //TODO: Get help getting this event to stay"))));
     };
     return ContactDisplay;
 })(React.Component);
@@ -89,7 +90,6 @@ var CompanyDisplay = (function (_super) {
         };
         this.ViewContacts = function (Current) {
             $("#CompanyDisplay-" + _this.props.ID).append("<div id='fhhgk75d471' />");
-            var LastQuoteElement = document.getElementById("fhhgk75d47");
             $.getJSON("/Companies/GetContacts/" + _this.props.ID, function (data) {
                 for (var _i = 0; _i < data.length; _i++) {
                     var Item = data[_i];
