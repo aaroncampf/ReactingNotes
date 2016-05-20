@@ -48,7 +48,7 @@ class Note {
 
 
 class ContactDisplay extends React.Component<Contact, Contact> {
-    private ViewNotes = (Current: ContactDisplay) => { //TODO: Get help removing this BS because [this] is broken
+    private ViewNotes = (Current: ContactDisplay): void => { //TODO: Get help removing this BS because [this] is broken
         $("#ContactDisplay-" + this.props.ID).append("<div id='fhhgk75d472' />")
         var Rows: JSX.Element[] = []
         for (var Item of this.props.Notes) {
@@ -62,13 +62,15 @@ class ContactDisplay extends React.Component<Contact, Contact> {
             Rows.push(Test)
         }
 
-        return (
+        var Test1 = React.renderToString(
             <table id={"QuoteDisplay-" + this.props.ID} className = "table-striped table-bordered">
                 <tbody>
                     <tr><td colSpan={5} style = {{ "text-align": "center" }}><h3>{this.props.Name}</h3></td></tr>
                     {Rows}
-                    </tbody>
-            </table>);        
+                </tbody>
+            </table>)
+
+        $("#fhhgk75d472").append(Test1)
     }
 
     render() {
@@ -93,14 +95,15 @@ class ContactDisplay extends React.Component<Contact, Contact> {
                         <td>{this.props.Position}</td>
                     </tr>
                     <tr>
-                        <td colSpan={2}><a className = "btn btn-primary" onClick= {() => this.ViewNotes(this)}>View Notes</a></td> //TODO: Get help getting this event to stay
+                        <td colSpan={2}>
+                            <a className = "btn btn-primary" onClick= {() => this.ViewNotes(this)}>View Notes</a>
+                        //TODO: Get help getting this event to stay
+                        </td> 
                     </tr> 
                 </tbody>
             </table>);
     }
 }
-
-
 
 class QuoteDisplay extends React.Component<Quote, Quote> {
     render() {
@@ -184,7 +187,7 @@ class CompanyDisplay extends React.Component<Company, Company> {
                     <tr>
                         <td>Phone</td>
                         <td>{this.props.Phone}</td>
-                        </tr>
+                    </tr>
                     <tr>
                         <td>Zip</td>
                         <td>{this.props.Zip}</td>
@@ -263,7 +266,7 @@ $.getJSON("/Companies/GetCompany/1",
                 Phone ={data.Phone}
                 Zip={data.Zip}
                 Misc= {data.Misc}
-                />,
+            />,
             document.getElementById('content')
         );
     }
