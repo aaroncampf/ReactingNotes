@@ -7,31 +7,43 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var Company = (function () {
-    function Company() {
-    }
-    return Company;
-})();
-var Quote = (function () {
-    function Quote() {
-    }
-    return Quote;
-})();
-var QuoteLine = (function () {
-    function QuoteLine() {
-    }
-    return QuoteLine;
-})();
-var Contact = (function () {
-    function Contact() {
-    }
-    return Contact;
-})();
-var Note = (function () {
-    function Note() {
-    }
-    return Note;
-})();
+//class Company {
+//    public ID: number
+//    public Name: string
+//    public Address: string
+//    public City: string
+//    public Phone: string
+//    public Zip: string
+//    public Misc: string
+//}
+//class Quote {
+//    public ID: number
+//    public Name: string
+//    public Date: Date
+//    public Lines: QuoteLine[]
+//}
+//class QuoteLine {
+//    public ID: number
+//    public Display: number
+//    public UNIT: string
+//    public COST: number
+//    public DESC : string
+//    public IsCentered : boolean
+//}
+//class Contact {
+//    public ID: number
+//    public Name: string
+//    public Phone: string
+//    public Email: string
+//    public Position: string
+//    public Notes: Note[]
+//}
+//class Note {
+//    public ID: number
+//    public Date: Date
+//    public Title: string
+//    public Text: string
+//}
 var ContactDisplay = (function (_super) {
     __extends(ContactDisplay, _super);
     function ContactDisplay() {

@@ -324,6 +324,7 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="Scripts\Aaron\Data.ts" />
     <TypeScriptCompile Include="Scripts\HelloReact.tsx" />
     <TypeScriptCompile Include="Scripts\types\react-dom.d.ts" />
     <TypeScriptCompile Include="Scripts\types\react-global.d.ts" />
