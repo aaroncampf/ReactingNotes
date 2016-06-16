@@ -7,43 +7,6 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-//class Company {
-//    public ID: number
-//    public Name: string
-//    public Address: string
-//    public City: string
-//    public Phone: string
-//    public Zip: string
-//    public Misc: string
-//}
-//class Quote {
-//    public ID: number
-//    public Name: string
-//    public Date: Date
-//    public Lines: QuoteLine[]
-//}
-//class QuoteLine {
-//    public ID: number
-//    public Display: number
-//    public UNIT: string
-//    public COST: number
-//    public DESC : string
-//    public IsCentered : boolean
-//}
-//class Contact {
-//    public ID: number
-//    public Name: string
-//    public Phone: string
-//    public Email: string
-//    public Position: string
-//    public Notes: Note[]
-//}
-//class Note {
-//    public ID: number
-//    public Date: Date
-//    public Title: string
-//    public Text: string
-//}
 var ContactDisplay = (function (_super) {
     __extends(ContactDisplay, _super);
     function ContactDisplay() {
@@ -118,55 +81,7 @@ var CompanyDisplay = (function (_super) {
     };
     return CompanyDisplay;
 })(React.Component);
-//var CommentBox = React.createClass({
-//    propTypes: {
-//        Name: React.PropTypes.element.isRequired
-//    },
-//    render: function () {
-//        return (
-//            <div className="commentBox">
-//                {this.props.Name}
-//                Hello, world!I am a CommentBox.1
-//                </div>
-//        );
-//    }
-//});
-var myRequest = new XMLHttpRequest();
-myRequest.open("GET", "/Companies/GetCompany/1");
-myRequest.response;
-$.ajax("/Companies/GetCompany/1");
-//$.ajax("/Companies/GetCompany/1").
-/*
-$.get("/Companies/GetCompany/1",
-    (data) => {
-        ReactDOM.render(
-            <CompanyDisplay
-                ID= {data.ID}
-                Name={data.Name}
-                Address = {data.Address}
-                City = {data.City}
-                Phone ={data.Phone}
-                Zip={data.Zip}
-                Misc= {data.Misc}
-                />,
-            document.getElementById('content')
-        );
-    }
-);
-*/
 $.getJSON("/Companies/GetCompany/1", function (data) {
     ReactDOM.render(React.createElement(CompanyDisplay, {"ID": data.ID, "Name": data.Name, "Address": data.Address, "City": data.City, "Phone": data.Phone, "Zip": data.Zip, "Misc": data.Misc}), document.getElementById('content'));
 });
-//ReactDOM.render(
-//    <CompanyDisplay
-//        ID={1}
-//        Name="Sebastian"
-//        Address = ""
-//        City = "Portland"
-//        Phone =""
-//        Zip=""
-//        Misc= ""
-//    />,
-//    document.getElementById('content')
-//); 
 //# sourceMappingURL=HelloReact.js.map
