@@ -486,7 +486,7 @@
         <EntityTypeShape EntityType="Database.QuoteLine" Width="1.5" PointX="5.25" PointY="4.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Database.QuoteSection" Width="1.5" PointX="7.75" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Database.QuoteSectionDetail" Width="1.5" PointX="10" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="Database.Setting" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database.Setting" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
         <AssociationConnector Association="Database.ContactNote" ManuallyRouted="false" />
         <AssociationConnector Association="Database.CustomerContact" ManuallyRouted="false" />
         <AssociationConnector Association="Database.CustomerQuote" ManuallyRouted="false" />

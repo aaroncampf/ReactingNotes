@@ -10,9 +10,7 @@
 Imports System
 Imports System.Collections.Generic
 
-<Runtime.Serialization.DataContract>
 Partial Public Class Company
-    <Runtime.Serialization.DataMember>
     Public Property ID As Integer
     Public Property Name As String
     Public Property Address As String
@@ -21,11 +19,7 @@ Partial Public Class Company
     Public Property Zip As String
     Public Property Misc As String
 
-    '<Runtime.Serialization.IgnoreDataMember>
     Public Overridable Property Contacts As ICollection(Of Contact) = New HashSet(Of Contact)
-
-    '<Newtonsoft.Json.JsonIgnore>
-    '<Runtime.Serialization.IgnoreDataMember>
     Public Overridable Property Quotes As ICollection(Of Quote) = New HashSet(Of Quote)
 
 End Class
