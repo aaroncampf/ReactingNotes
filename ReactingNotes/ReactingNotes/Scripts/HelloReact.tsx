@@ -3,6 +3,15 @@
 /// <reference path="typings/jquery/jquery.d.ts" />
 /// <reference path="types/react-dom.d.ts" />
 
+module Helpers {
+	export function CorrectDates(value: string): string {
+		var d = /\/Date\((\d*)\)\//.exec(value);
+		return (d) ? new Date(+d[1]).toDateString() : value;
+	}
+}
+
+
+
 class ContactDisplay extends React.Component<Contact, Contact> {
 	Get_BaseName() { return "ContactDisplay" + this.props.ID }
 
@@ -13,7 +22,7 @@ class ContactDisplay extends React.Component<Contact, Contact> {
             var Test =
                 <tr>
                     <td>{Item.ID}</td>
-                    <td>{Item.Date}</td>
+                    <td>{Helpers.CorrectDates(Item.Date.toString())}</td>
                     <td>{Item.Title}</td>
                     <td>{Item.Text}</td>
                 </tr>

@@ -7,6 +7,14 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
+var Helpers;
+(function (Helpers) {
+    function CorrectDates(value) {
+        var d = /\/Date\((\d*)\)\//.exec(value);
+        return (d) ? new Date(+d[1]).toDateString() : value;
+    }
+    Helpers.CorrectDates = CorrectDates;
+})(Helpers || (Helpers = {}));
 var ContactDisplay = (function (_super) {
     __extends(ContactDisplay, _super);
     function ContactDisplay() {
@@ -17,7 +25,7 @@ var ContactDisplay = (function (_super) {
             var Rows = []; //<= Ask Chris how to inline this
             for (var _i = 0, _a = _this.props.Notes; _i < _a.length; _i++) {
                 var Item = _a[_i];
-                var Test = React.createElement("tr", null, React.createElement("td", null, Item.ID), React.createElement("td", null, Item.Date), React.createElement("td", null, Item.Title), React.createElement("td", null, Item.Text));
+                var Test = React.createElement("tr", null, React.createElement("td", null, Item.ID), React.createElement("td", null, Helpers.CorrectDates(Item.Date.toString())), React.createElement("td", null, Item.Title), React.createElement("td", null, Item.Text));
                 Rows.push(Test);
             }
             var Table = React.createElement("table", {"id": "QuoteDisplay-" + _this.props.ID, "className": "table-striped table-bordered"}, React.createElement("tbody", null, React.createElement("tr", null, React.createElement("td", {"colSpan": 5, "style": { "text-align": "center" }}, React.createElement("h3", null, _this.props.Name))), Rows));
