@@ -4,9 +4,11 @@
 /// <reference path="types/react-dom.d.ts" />
 
 class ContactDisplay extends React.Component<Contact, Contact> {
+	Get_BaseName() { return "ContactDisplay" + this.props.ID }
+
     private ViewNotes = (Current: ContactDisplay): void => { //TODO: Get help removing this BS because [this] is broken
-        $("#ContactDisplay-" + this.props.ID).append("<div id='fhhgk75d472' />")
-        var Rows: JSX.Element[] = []
+        $("#" + this.Get_BaseName()).append("<div id='fhhgk75d472' />")
+        var Rows: JSX.Element[] = [] //<= Ask Chris how to inline this
         for (var Item of this.props.Notes) {
             var Test =
                 <tr>
@@ -18,52 +20,56 @@ class ContactDisplay extends React.Component<Contact, Contact> {
             Rows.push(Test)
         }
 
-        var Test1 = React.renderToString(
+        var Table = 
             <table id={"QuoteDisplay-" + this.props.ID} className = "table-striped table-bordered">
                 <tbody>
                     <tr><td colSpan={5} style = {{ "text-align": "center" }}><h3>{this.props.Name}</h3></td></tr>
                     {Rows}
                 </tbody>
-            </table>)
-
-        $("#fhhgk75d472").append(Test1)
+			</table>
+		
+		ReactDOM.render(Table, document.getElementById(this.Get_BaseName() + "_ViewNotes"))
     }
 
     render() {
         return (
-            <table id={"ContactDisplay-" + this.props.ID} className = "table-striped table-bordered">
-                <tbody>
-                    <tr><td colSpan={2} style = {{ "text-align": "center" }}><h3>{this.props.Name}</h3></td></tr>
-                    <tr>
-                        <td>ID</td>
-                        <td>{this.props.ID}</td>
-                    </tr>
-                    <tr>
-                        <td>Phone</td>
-                        <td>{this.props.Phone}</td>
-                    </tr>
-                    <tr>
-                        <td>Email</td>
-                        <td>{this.props.Email}</td>
-                    </tr>
-                    <tr>
-                        <td>Position</td>
-                        <td>{this.props.Position}</td>
-                    </tr>
-                    <tr>
-                        <td colSpan={2}>
-                            <a className = "btn btn-primary" onClick= {() => this.ViewNotes(this)}>View Notes</a>
-                        //TODO: Get help getting this event to stay
-                        </td> 
-                    </tr> 
-                </tbody>
-            </table>);
+			<div id={this.Get_BaseName() }>
+				<table className = "table-striped table-bordered">
+					<tbody>
+						<tr><td colSpan={2} style = {{ "text-align": "center" }}><h3>{this.props.Name}</h3></td></tr>
+						<tr>
+							<td>ID</td>
+							<td>{this.props.ID}</td>
+						</tr>
+						<tr>
+							<td>Phone</td>
+							<td>{this.props.Phone}</td>
+						</tr>
+						<tr>
+							<td>Email</td>
+							<td>{this.props.Email}</td>
+						</tr>
+						<tr>
+							<td>Position</td>
+							<td>{this.props.Position}</td>
+						</tr>
+						<tr>
+							<td colSpan={2}>
+								<a className = "btn btn-primary" onClick= {() => this.ViewNotes(this)}>View Notes</a>
+							//TODO: Get help getting this event to stay
+							</td> 
+						</tr> 
+					</tbody>
+				</table>
+				<div id={ this.Get_BaseName() + "_ViewNotes" }></div>
+			</div>
+		);
     }
 }
 
 class QuoteDisplay extends React.Component<Quote, Quote> {
     render() {
-        var Rows: JSX.Element[] = []
+        var Rows: JSX.Element[] = [] //<= Ask Chris how to inline this
         for (var Item of this.props.Lines) {
             var Test =
                 <tr>
@@ -88,36 +94,35 @@ class QuoteDisplay extends React.Component<Quote, Quote> {
 
 
 class CompanyDisplay extends React.Component<Company, Company> {
-    private ViewQuotes = (Current: CompanyDisplay) => { //TODO: Get help removing this BS because [this] is broken
-        $("#CompanyDisplay-" + this.props.ID).append("<div id='fhhgk75d47' />")
-        var LastQuoteElement = document.getElementById("fhhgk75d47")
+	Get_BaseName() { return "CompanyDisplay" + this.props.ID }
 
+    private ViewQuotes = (Current: CompanyDisplay) => { //TODO: Get help removing this BS because [this] is broken
         $.getJSON("/Companies/GetQuotes/" + this.props.ID,
-            (data) => {              
+            (data) => {
+				var Quotes: JSX.Element[] = [] //<= Ask Chris how to inline this             
                 for (var Item of data) {
                     var Quote: Quote = Item
-
-                    var Test = React.renderToString(
+                    Quotes.push(
                         <QuoteDisplay ID = {Quote.ID} Name = {Quote.Name} Date = {Quote.Date} Lines = {Quote.Lines} />
                     );
-                    $("#fhhgk75d47").append(Test)
+
+					ReactDOM.render(<div>{Quotes}</div>, document.getElementById(this.Get_BaseName() + "_ViewQuotes"))
                 }
             }
         )
     }
 
     private ViewContacts = (Current: CompanyDisplay) => { //TODO: Get help removing this BS because [this] is broken
-        $("#CompanyDisplay-" + this.props.ID).append("<div id='fhhgk75d471' />")
-
         $.getJSON("/Companies/GetContacts/" + this.props.ID,
             (data) => {
+				var Contacts: JSX.Element[] = [] //<= Ask Chris how to inline this
                 for (var Item of data) {
                     var Contact: Contact = Item
-
-                    var Test = React.renderToString(
+                    Contacts.push(
                         <ContactDisplay ID = {Contact.ID} Name = {Contact.Name} Email = {Contact.Email} Phone = {Contact.Phone} Position = {Contact.Position} Notes = {Contact.Notes} />
                     );
-                    $("#fhhgk75d471").append(Test)
+
+					ReactDOM.render(<div>{Contacts}</div>, document.getElementById(this.Get_BaseName() + "_ViewContacts"))
                 }
             }
         )
@@ -125,44 +130,50 @@ class CompanyDisplay extends React.Component<Company, Company> {
 
     render() {
         return (
-            <table id={"CompanyDisplay-" + this.props.ID} className = "table-striped table-bordered">
-                <tbody>
-                    <tr><td colSpan={2} style = {{ "text-align": "center" }}><h3>{this.props.Name}</h3></td></tr>
-                    <tr>
-                        <td>ID</td>
-                        <td>{this.props.ID}</td>
-                        </tr>
-                    <tr>
-                        <td>Address</td>
-                        <td>{this.props.Address}</td>
-                        </tr>
-                    <tr>
-                        <td>City</td>
-                        <td>{this.props.City}</td>
-                        </tr>
-                    <tr>
-                        <td>Phone</td>
-                        <td>{this.props.Phone}</td>
-                    </tr>
-                    <tr>
-                        <td>Zip</td>
-                        <td>{this.props.Zip}</td>
-                        </tr>
-                    <tr>
-                        <td>Misc</td>
-                        <td>{this.props.Misc}</td>
-                        </tr>
-                    <tr>
-                        <td colSpan={2}><a className = "btn btn-primary" href={"/Companies/Edit/" + this.props.ID}>Edit</a></td>
-                    </tr>
-                    <tr>
-                        <td colSpan={2}><a className = "btn btn-primary" onClick= {() => this.ViewQuotes(this)}>View Quotes</a></td>
-                    </tr> 
-                    <tr>
-                        <td colSpan={2}><a className = "btn btn-primary" onClick= {() => this.ViewContacts(this)}>View Contacts</a></td>
-                    </tr> 
-                </tbody>
-            </table>);
+			<div id = {this.Get_BaseName()}>
+				<table className = "table-striped table-bordered">
+					<tbody>
+						<tr><td colSpan={2} style = {{ "text-align": "center" }}><h3>{this.props.Name}</h3></td></tr>
+						<tr>
+							<td>ID</td>
+							<td>{this.props.ID}</td>
+						</tr>
+						<tr>
+							<td>Address</td>
+							<td>{this.props.Address}</td>
+						</tr>
+						<tr>
+							<td>City</td>
+							<td>{this.props.City}</td>
+						</tr>
+						<tr>
+							<td>Phone</td>
+							<td>{this.props.Phone}</td>
+						</tr>
+						<tr>
+							<td>Zip</td>
+							<td>{this.props.Zip}</td>
+						</tr>
+						<tr>
+							<td>Misc</td>
+							<td>{this.props.Misc}</td>
+						</tr>
+						<tr>
+							<td colSpan={2}><a className = "btn btn-primary" href={"/Companies/Edit/" + this.props.ID}>Edit</a></td>
+						</tr>
+						<tr>
+							<td colSpan={2}><a className = "btn btn-primary" onClick= {() => this.ViewQuotes(this)}>View Quotes</a></td>
+						</tr> 
+						<tr>
+							<td colSpan={2}><a className = "btn btn-primary" onClick= {() => this.ViewContacts(this)}>View Contacts</a></td>
+						</tr> 
+					</tbody>
+				</table>
+
+				<div id = { this.Get_BaseName() + "_ViewQuotes" }></div>
+				<div id = { this.Get_BaseName() + "_ViewContacts" }></div>
+			</div>
+		);
     }
 }
 

@@ -12,6 +12,8 @@ End Code
 
 
 <h1>Recreate this project as a WebAPI project!</h1>
+<h1>Add Ability to remove data after displaying it</h1>
+
 
 
 @section scripts
