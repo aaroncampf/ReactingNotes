@@ -14,15 +14,15 @@ Namespace Controllers
 
         ' GET: Companies/Details/5
         Function Details(ByVal id As Integer?) As ActionResult
-            If IsNothing(id) Then
-                Return New HttpStatusCodeResult(HttpStatusCode.BadRequest)
-            End If
-            Dim company As Company = db.Companies.Find(id)
-            If IsNothing(company) Then
-                Return HttpNotFound()
-            End If
-            Return View(company)
-        End Function
+			If IsNothing(id) Then
+				Return New HttpStatusCodeResult(HttpStatusCode.BadRequest)
+			End If
+			Dim company As Company = db.Companies.Find(id)
+			If IsNothing(company) Then
+				Return HttpNotFound()
+			End If
+			Return View(company)
+		End Function
 
         ' GET: Companies/Create
         Function Create() As ActionResult
@@ -92,24 +92,24 @@ Namespace Controllers
             Return RedirectToAction("Index")
         End Function
 
-        Public Function GetCompany(ID As Integer) As JsonResult
+		Public Function GetCompany(ID As Integer) As JsonResult
             'TODO: convert this project into WebAPI and see if that resolves the issue
             Dim Test = db.Companies.Find(ID)
 
-            Return Json(New With {
-                            .ID = Test.ID,
-                            .Name = Test.Name,
-                            .Address = Test.Address,
-                            .City = Test.City,
-                            .Phone = Test.Phone,
-                            .Zip = Test.Zip,
-                            .Misc = Test.Misc
-                        },
-                        JsonRequestBehavior.AllowGet
-            )
-        End Function
+			Return Json(New With {
+							.ID = Test.ID,
+							.Name = Test.Name,
+							.Address = Test.Address,
+							.City = Test.City,
+							.Phone = Test.Phone,
+							.Zip = Test.Zip,
+							.Misc = Test.Misc
+						},
+						JsonRequestBehavior.AllowGet
+			)
+		End Function
 
-        Public Function GetQuotes(ID As Integer) As ActionResult
+		Public Function GetQuotes(ID As Integer) As ActionResult
             Dim JSON_Data = db.Companies.Find(ID).Quotes.Select(
                 Function(x)
                     Dim Lines = db.Quotes.Find(x.ID).Lines.ToArray.Select(Function(y) New With {y.ID, y.UNIT, y.COST, y.DESC, y.IsCentered})

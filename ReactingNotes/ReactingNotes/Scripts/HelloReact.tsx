@@ -115,7 +115,8 @@ class QuoteDisplay extends React.Component<Quote, Quote> {
 	}
 }
 
-
+/**
+*/
 class CompanyDisplay extends React.Component<Company, Company> {
 	Get_BaseName() { return "CompanyDisplay" + this.props.ID }
 	private Settings = { IsOpen_ViewContacts: false, IsOpen_ViewQuotes: false }
